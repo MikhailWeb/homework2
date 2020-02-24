@@ -9,8 +9,8 @@ function task1($arrStr, $concat = false)
     if ($concat) {
         return implode(" ", $arrStr);
     } else {
-        foreach ($arrStr as $value) {
-            echo '<p>'.$value.'</p>';
+        foreach ($arrStr as $string) {
+            echo '<p>'.$string.'</p>';
         }
     }
 }
@@ -42,21 +42,21 @@ function task2(...$args)
 }
 
 /**
- * @param $m
- * @param $n
+ * @param $rows
+ * @param $cols
  */
-function task3($m, $n)
+function task3($rows, $cols)
 {
-    if (!is_int($m) || !is_int($n)) {
+    if (!is_int($rows) || !is_int($cols)) {
         echo 'Неверный тип входных параметров';
         return;
     }
 
     echo '<table cellpadding="3" cellspacing="1" border="1">';
-    for ($i = 1; $i <= $m; $i++) {
+    for ($r = 1; $r <= $rows; $r++) {
         echo '<tr>';
-        for ($j = 1; $j <= $n; $j++) {
-            echo '<td style="text-align: center; width: 30px; height: 35px;">'.$i*$j.'</td>';
+        for ($c = 1; $c <= $cols; $c++) {
+            echo '<td style="text-align: center; width: 30px; height: 35px;">'.$r*$c.'</td>';
         }
         echo '</tr>';
     }
@@ -73,9 +73,9 @@ function task4_1()
  */
 function task4_2($strDate)
 {
-    $date = explode(".", $strDate);
-    if (checkdate(intval($date[1]), intval($date[0]), intval($date[2]))) {
-        echo 'Метка времени Unix для даты '.$strDate.' = '.mktime(0, 0, 0, intval($date[0]), intval($date[1]), intval($date[2]));
+    [$day, $month, $year] = explode('.', $strDate);
+    if (checkdate($month, $day, $year)) {
+        echo 'Метка времени Unix для даты '.$strDate.' = '.mktime(0, 0, 0, $day, $month, $year);
     } else {
         echo 'Некорректная дата';
     }
@@ -83,11 +83,11 @@ function task4_2($strDate)
 
 /**
  * @param $str
- * @param $s
+ * @param $search
  */
-function task5_1($str, $s)
+function task5_1($str, $search)
 {
-    echo str_replace($s, '', $str);
+    echo str_replace($search, '', $str);
 }
 
 /**
@@ -100,6 +100,16 @@ function task5_2($str, $replace)
         $str = str_replace($key, $value, $str);
     }
     echo $str;
+}
+
+/**
+ * @param $str
+ * @param $replace
+ */
+function task5_2_1($str, $replace)
+{
+    $src = explode(' ', $str);
+    echo implode(' ', str_replace($src, $replace, $src));
 }
 
 /**
